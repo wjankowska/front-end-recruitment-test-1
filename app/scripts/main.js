@@ -17,6 +17,10 @@
  *
  */
 /* eslint-env browser */
+
+import BaconButton from "./Bacon/BaconButton";
+import BaconManager from "./Bacon/BaconManager";
+
 (function() {
   'use strict';
 
@@ -76,4 +80,15 @@
   }
 
   // Your custom JavaScript goes here
+
+  // Task 1
+  const baconManager = new BaconManager(
+    document.getElementsByClassName('add-bacon-image')[0].getAttribute('src'),
+    document.getElementsByClassName('bacons-container')[0]
+  );
+  const baconButton = new BaconButton(document.getElementsByClassName('add-bacon-button')[0]);
+
+  baconButton.subscribe(() => {
+    baconManager.addBacon();
+  });
 })();
