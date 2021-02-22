@@ -20,6 +20,7 @@ will be correctly compiled during `gulp serve` and `gulp`
  */
 
 @import './bacon.scss';
+@import './form.scss';
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -55,6 +56,9 @@ html, body {
 .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab {
   height: 64px;
   line-height: 64px;
+}
+.mdl-demo .mdl-layout--gray-bg {
+  background: #f2f2f2;
 }
 .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
   background-color: white;
@@ -113,6 +117,7 @@ html, body {
 }
 .mdl-demo section.section--center {
   max-width: 860px;
+  margin: 0 auto;
 }
 .mdl-demo #features section.section--center {
   max-width: 620px;
@@ -182,7 +187,7 @@ html, body {
 .mdl-demo .mdl-card .mdl-card__supporting-text > h3:first-child {
   margin-bottom: 24px;
 }
-.mdl-demo .mdl-layout__tab-panel:not(#overview) {
+.mdl-demo .mdl-layout__tab-panel:not(#overview):not(#checkout) {
   background-color: white;
 }
 .mdl-demo #features section {
@@ -212,4 +217,10 @@ html, body {
 }
 .mdl-demo .mdl-menu__container {
   z-index: 99;
+}
+
+.mdl-demo .mdl-grid {
+  margin-left: -8px;
+  margin-right: -8px;
+  padding: 0;
 }

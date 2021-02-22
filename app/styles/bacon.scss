@@ -9,25 +9,25 @@
 }
 
 .bacon-image-wrapper {
-    position: fixed;
-    z-index: 999;
-    width: 200px;
+  position: fixed;
+  z-index: 999;
+  width: 200px;
 
-    img {
-        width: 100%;
-        position: relative;
-        border: 5px solid #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        animation: 0.2s ease-out appear;
-    }
-      
-    .particle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        pointer-events: none;
-        background-repeat: no-repeat;
-        background-size: contain;
-    }
+  img {
+      width: 100%;
+      position: relative;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      animation: 0.2s ease-out appear;
+  }
+    
+  .particle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-size: contain;
+  }
 }
