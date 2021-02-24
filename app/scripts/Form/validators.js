@@ -1,11 +1,14 @@
 /**
- * Validate if an element is not empty.
- * @param {HTMLInputElement} element - Element to be validated.
- * @return {{valid, message}} Valid is set to true when the field was
- *                            validated correctly. Message contains
- *                            the information about the invalid format.
+ * Object holding all of the validators function.
  */
 const Validators = {
+  /**
+   * Validate if an element is not empty.
+   * @param {HTMLInputElement} element - Element to be validated.
+   * @return {{valid, message}} Valid is set to true when the field was
+   *                            validated correctly. Message contains
+   *                            the information about the invalid format.
+   */
   requiredValidator(element) {
     if (element && element.value && element.value !== '') {
       return {
@@ -139,7 +142,7 @@ const Validators = {
       valid: false,
       message: `This field should be exactly ${length} characters long`,
     };
-  }
-}
+  },
+};
 
 export default Validators;

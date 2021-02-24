@@ -17,14 +17,13 @@
  *
  */
 /* eslint-env browser */
-
-import BaconButton from "./Bacon/BaconButton";
-import BaconManager from "./Bacon/BaconManager";
-import Form from "./Form/Form";
+import BaconButton from './Bacon/BaconButton';
+import BaconManager from './Bacon/BaconManager';
+import Form from './Form/Form';
 import FormField from './Form/FormField';
 import Validators from './Form/validators';
 
-(function () {
+(function() {
   'use strict';
 
   // Check to make sure service workers are supported in the current browser,
@@ -46,9 +45,9 @@ import Validators from './Form/validators';
     && (window.location.protocol === 'https:' || isLocalhost)
   ) {
     navigator.serviceWorker.register('service-worker.js')
-      .then(function (registration) {
+      .then(function(registration) {
         // updatefound is fired if service-worker.js changes.
-        registration.onupdatefound = function () {
+        registration.onupdatefound = function() {
           // updatefound is also fired the very first time the SW is installed,
           // and there's no need to prompt for a reload at that point.
           // So check here to see if the page is already controlled,
@@ -58,26 +57,26 @@ import Validators from './Form/validators';
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
             const installingWorker = registration.installing;
 
-            installingWorker.onstatechange = function () {
+            installingWorker.onstatechange = function() {
               switch (installingWorker.state) {
-                case 'installed':
-                  // At this point, the old content will have been purged and the
-                  // fresh content will have been added to the cache.
-                  // It's the perfect time to display a "New content is
-                  // available; please refresh." message in the page's interface.
-                  break;
+              case 'installed':
+                // At this point, the old content will have been purged and
+                // the fresh content will have been added to the cache.
+                // It's the perfect time to display a "New content is
+                // available; please refresh." message in the page's interface.
+                break;
 
-                case 'redundant':
-                  throw new Error('The installing ' +
-                    'service worker became redundant.');
+              case 'redundant':
+                throw new Error('The installing ' +
+                  'service worker became redundant.');
 
-                default:
-                // Ignore
+              default:
+              // Ignore
               }
             };
           }
         };
-      }).catch(function (e) {
+      }).catch(function(e) {
         console.error('Error during service worker registration:', e);
       });
   }
@@ -89,7 +88,9 @@ import Validators from './Form/validators';
     document.getElementsByClassName('add-bacon-image')[0].getAttribute('src'),
     document.getElementsByClassName('bacons-container')[0]
   );
-  const baconButton = new BaconButton(document.getElementsByClassName('add-bacon-button')[0]);
+  const baconButton = new BaconButton(
+    document.getElementsByClassName('add-bacon-button')[0]
+  );
 
   baconButton.subscribe(() => {
     baconManager.addBacon();
@@ -99,13 +100,31 @@ import Validators from './Form/validators';
   const fields = [
     new FormField('first_name', [Validators.requiredValidator]),
     new FormField('last_name', [Validators.requiredValidator]),
-    new FormField('email', [Validators.requiredValidator, Validators.emailValidator]),
+    new FormField(
+      'email',
+      [Validators.requiredValidator, Validators.emailValidator]
+    ),
     new FormField('country', [Validators.requiredValidator]),
     new FormField('postal_code', [Validators.requiredValidator]),
-    new FormField('phone_number', [Validators.requiredValidator, Validators.phoneNumberValidator]),
-    new FormField('card_number', [Validators.requiredValidator, Validators.creditCardValidator]),
-    new FormField('security_code', [Validators.requiredValidator, { validator: Validators.exactLengthValidator, param: 3 }]),
-    new FormField('expiration_date', [Validators.requiredValidator, Validators.expirationDateValidator])
+    new FormField(
+      'phone_number',
+      [Validators.requiredValidator, Validators.phoneNumberValidator]
+    ),
+    new FormField(
+      'card_number',
+      [Validators.requiredValidator, Validators.creditCardValidator]
+    ),
+    new FormField(
+      'security_code',
+      [
+        Validators.requiredValidator,
+        {validator: Validators.exactLengthValidator, param: 3},
+      ]
+    ),
+    new FormField(
+      'expiration_date',
+      [Validators.requiredValidator, Validators.expirationDateValidator]
+    ),
   ];
 
   const submitButton = document.getElementsByClassName('form__button')[0];
@@ -113,7 +132,7 @@ import Validators from './Form/validators';
 
   const form = new Form(fields, formElement);
 
-  formElement.addEventListener('submit', e => {
+  formElement.addEventListener('submit', (e) => {
     e.preventDefault();
     form.submitForm();
 
@@ -128,5 +147,4 @@ import Validators from './Form/validators';
     submitButton.removeAttribute('disabled');
     alert('Form submitted successfully');
   });
-
 })();

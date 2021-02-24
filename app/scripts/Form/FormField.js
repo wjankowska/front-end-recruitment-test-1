@@ -1,11 +1,22 @@
 import EventPublisher from './EventPublisher';
 
+/**
+ * Class representing a form field.
+ * The form field holds its state, checks validity,
+ * adjusts proper styling and fire
+ * its subscribers on the 'keyup' event.
+ */
 export default class FormField extends EventPublisher {
+  /**
+   * Constructing the FormField.
+   * @param {string} name FormField name.
+   * @param {Array.<function>} validators FormField validator functions.
+   */
   constructor(name, validators) {
     super();
 
     this.name = name;
-    this.state = {}
+    this.state = {};
 
     this.element = document.getElementById(name);
     this.validators = validators;
@@ -14,10 +25,14 @@ export default class FormField extends EventPublisher {
     this.listenToChange();
   }
 
+  /**
+   * Checking validity of the field. Iterating over all validator functions.
+   * @return {{valid: boolean, message: string}} Validity and error message.
+   */
   getValidState() {
     let valid = null;
 
-    for (let validator of this.validators) {
+    for (const validator of this.validators) {
       if (typeof validator === 'function') {
         valid = validator(this.element);
       } else if (
@@ -32,9 +47,13 @@ export default class FormField extends EventPublisher {
       }
     }
 
-    return { valid: true, message: '' };
+    return {valid: true, message: ''};
   }
 
+  /**
+   * Adding 'invalid' class when field is invalid
+   * or removing one when field is correct.
+   */
   styleElement() {
     let elToStyle = this.element.parentElement;
     const validMsg = elToStyle.getElementsByClassName('validation-msg')[0];
@@ -57,21 +76,31 @@ export default class FormField extends EventPublisher {
     }
   }
 
+  /**
+   * Validating field on keyup event.
+   */
   listenToChange() {
     this.element.addEventListener('keyup', () => {
       this.validateAndSetState();
-    })
+    });
   }
 
+  /**
+   * Checking validity and setting value, valid and errorMsg fields.
+   */
   setState() {
     const isValid = this.getValidState();
     this.state = {
       value: this.element.value,
       valid: isValid.valid,
-      errorMsg: isValid.message
-    }
+      errorMsg: isValid.message,
+    };
   }
 
+  /**
+   * Checking validity and setting value, valid and errorMsg fields.
+   * Styling the element.
+   */
   validateAndSetState() {
     this.setState();
     this.styleElement();
